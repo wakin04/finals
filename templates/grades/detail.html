@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Grade Details</h2>
+    
+    <div class="grade-info">
+        <p><strong>Student:</strong> {{ grade.enrollment.student }}</p>
+        <p><strong>Subject:</strong> {{ grade.enrollment.subject }}</p>
+        <p><strong>Type:</strong> {{ grade.get_grade_type_display }}</p>
+        <p><strong>Score:</strong> {{ grade.score }}/{{ grade.max_score }}</p>
+        <p><strong>Percentage:</strong> {{ grade.percentage|floatformat:2 }}%</p>
+        <p><strong>Date Given:</strong> {{ grade.date_given }}</p>
+        <p><strong>Comments:</strong> {{ grade.comments }}</p>
+    </div>
+    
+    <div class="actions">
+        <a href="{% url 'grade_update' grade.id %}" class="btn">Edit</a>
+        <a href="{% url 'grade_list' grade.enrollment.id %}" class="btn">Back to Grades</a>
+    </div>
+{% endblock %}

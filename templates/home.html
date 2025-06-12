@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="welcome">
+        <h2>Welcome to Student Management System</h2>
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Students</h3>
+                <p>{{ total_students }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Subjects</h3>
+                <p>{{ total_subjects }}</p>
+            </div>
+        </div>
+        <div class="actions">
+            <a href="{% url 'student_list' %}" class="btn">Manage Students</a>
+            <a href="/admin" class="btn">Admin Panel</a>
+        </div>
+    </div>
+{% endblock %}

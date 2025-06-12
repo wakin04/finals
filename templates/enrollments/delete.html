@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Delete Enrollment</h2>
+    
+    <p>Are you sure you want to remove {{ enrollment.student }} from {{ enrollment.subject }}?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn danger">Confirm Delete</button>
+        <a href="{% url 'student_detail' enrollment.student.student_id %}" class="btn">
+            Cancel
+        </a>
+    </form>
+{% endblock %}

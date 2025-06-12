@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Grades for {{ enrollment.student }} in {{ enrollment.subject }}</h2>
+    
+    <a href="{% url 'grade_create' enrollment.id %}" class="btn">Add New Grade</a>
+    <a href="{% url 'student_detail' enrollment.student.student_id %}" class="btn">Back to Student</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Score</th>
+                <th>Percentage</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in grades %}
+            <tr>
+                <td>{{ grade.get_grade_type_display }}</td>
+                <td>{{ grade.score }}/{{ grade.max_score }}</td>
+                <td>{{ grade.percentage|floatformat:2 }}%</td>
+                <td>{{ grade.date_given }}</td>
+                <td>
+                    <a href="{% url 'grade_detail' grade.id %}" class="btn">View</a>
+                    <a href="{% url 'grade_update' grade.id %}" class="btn">Edit</a>
+                    <a href="{% url 'grade_delete' grade.id %}" class="btn danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="grade-summary">
+        <h3>Grade Summary</h3>
+        <div id="gradeChart"></div>
+    </div>
+{% endblock %}

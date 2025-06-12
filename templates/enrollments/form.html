@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ action }}</h2>
+    
+    {% if student %}
+    <p>Enrolling: <strong>{{ student }}</strong></p>
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn">Save</button>
+            <a href="{% if student %}{% url 'student_detail' student.student_id %}{% else %}{% url 'student_list' %}{% endif %}" class="btn cancel">
+                Cancel
+            </a>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Student Details: {{ student.first_name }} {{ student.last_name }}</h2>
+    
+    <div class="student-info">
+        <div>
+            <p><strong>Student ID:</strong> {{ student.student_id }}</p>
+            <p><strong>Email:</strong> {{ student.email }}</p>
+            <p><strong>Phone:</strong> {{ student.phone_number }}</p>
+        </div>
+        <div>
+            <p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p>
+            <p><strong>Address:</strong> {{ student.address }}</p>
+        </div>
+    </div>
+    
+    <div class="actions">
+        <a href="{% url 'student_update' student.student_id %}" class="btn">Edit</a>
+        <a href="{% url 'student_delete' student.student_id %}" class="btn danger">Delete</a>
+    </div>
+    
+    <h3>Enrolled Subjects</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Enrollment Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+          
+            {% for enrollment in enrollments %}
+            <tr>
+                <td>{{ enrollment.subject.code }}</td>
+                <td>{{ enrollment.subject.name }}</td>
+                <td>{{ enrollment.enrollment_date }}</td>
+                <td>
+                    <a href="{% url 'grade_list' enrollment.id %}" class="btn">View Grades</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
